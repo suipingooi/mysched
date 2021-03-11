@@ -1,0 +1,21 @@
+{% extends 'base.template.html' %}
+
+{%block content%}
+
+<h4>Training Database</h4>
+
+<form method="GET" class="d-flex">
+    <input type="text" name="datetime" class="form-control me-2"  placeholder="Search by Ice Type" aria-label="Search"/>
+    <input type="submit" value="search" class="btn btn-outline-success ml-3"/>
+</form> 
+    {%for schedule in schedule %}
+    <div class="card m-3" style="width: 22rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{schedule.datetime}}</h5>
+            <h6 class="card-title">{{schedule.ice_type}}</h6>
+            <h6 class="card-title">{{schedule.coach_id}}</h6>
+            <h6 class="card-title">{{schedule.students}}</h6>
+        </div>
+    </div>
+    {%endfor%}
+{%endblock%}
