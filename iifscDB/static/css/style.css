@@ -2,10 +2,13 @@ body {
     background-color: aliceblue;
     margin: 25px;
 }
-.card {
+.coach {
     margin: 10px;
     padding: 5px;
     color: Navy;
+    width: 22rem;
+}
+#coachcard {
     display: flex;
     flex-wrap: wrap;
 }

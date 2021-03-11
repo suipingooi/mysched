@@ -5,20 +5,22 @@
 <h4>Coaches List</h4>
 <nav class="navbar navbar-light mx-auto justify-content-between">
   <form method="GET" class="form-inline">
-    <input class="form-control mr-sm-2" type="text" name="coach_fname" placeholder="Search by Name" aria-label="Search">
+    <input class="form-control mr-sm-2" type="text" name="coach_fname" placeholder="Search by NROC" aria-label="Search">
     <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search"/>
   </form>
   <a class="btn btn-success mx-auto d-block" href="{{ url_for('add_newcoach')}}">Add New</a>
 </nav>
-
-    {%for coaches in coaches %}
-    <div class="card m-3" style="width: 22rem;">
-        <img class="card-img-top" src="#" alt="card img caption" />
-        <div class="card-body">
-            <h5 class="card-title">Coach {{coaches.coach_fname}} {{coaches.coach_lname}}</h5>
-            <h6 class="card-title">NROC{{coaches.nroc_level}}</h6>
-            <p class="card-text">{{coaches.philosophy}}</p>
+    <div id="coachcard">
+        {%for coaches in coaches %}
+        <div class="card coach m-3">
+            <img class="card-img-top" src="#" alt="card img caption" />
+            <div class="card-body">
+                <h5 class="card-title">Coach {{coaches.coach_fname}} {{coaches.coach_lname}}</h5>
+                <h6 class="card-title">NROC{{coaches.nroc_level}}</h6>
+                <p class="card-text">{{coaches.philosophy}}</p>
+                <button class="btn btn-outline-info" href="#">Check Availability</button>
+            </div>
         </div>
+        {%endfor%}
     </div>
-    {%endfor%}
 {%endblock%}
