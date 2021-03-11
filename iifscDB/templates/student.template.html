@@ -4,19 +4,20 @@
 
 <h4>Skaters List</h4>
 <nav class="navbar navbar-light mx-auto justify-content-between">
-  <form method="GET" class="form-inline">
-    <input class="form-control mr-sm-2" type="text" name="skate_level" placeholder="Search by Skate Level" aria-label="Search">
-    <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search"/>
-  </form>
-  <a class="btn btn-success mx-auto d-block" href="{{ url_for('add_newstudent')}}">Add New</a>
+    <form method="GET" class="form-inline">
+        <input class="form-control mr-sm-2" type="text" name="skate_level" placeholder="Search by Skate Level"
+            aria-label="Search">
+        <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search" />
+    </form>
+    <a class="btn btn-success mx-auto d-block" href="{{ url_for('add_newstudent')}}">Add New</a>
 </nav>
 <div class="cards">
-    {%for skaters in skaters %}
+    {%for students in students %}
     <div class="card m-3 student">
         <img class="card-img-top" src="#" alt="card caption" />
         <div class="card-body">
-            <h5 class="card-title">{{skaters.student_lname}}, {{skaters.student_fname}}</h5>
-            <h5 class="card-title">{{skaters.skate_level}}</h5>
+            <h5 class="card-title">{{students.student_lname}}, {{students.student_fname}}</h5>
+            <h5 class="card-title">{{students.skate_level}}</h5>
         </div>
     </div>
     {%endfor%}
