@@ -6,25 +6,25 @@
     <div class="form-row mt-3">
         <div class="form-group col-md-6">
             <label class="form-label">First Name </label>
-            <input type="text" name="student_fname" class="form-control" placeholder="given name">
+            <input type="text" name="student_fname" class="form-control" placeholder="given name" required>
         </div>
         <div class="form-group col-md-6">
             <label class="form-label">Last Name </label>
-            <input type="text" name="student_lname" class="form-control" placeholder="family name">
+            <input type="text" name="student_lname" class="form-control" placeholder="family name" required>
         </div>
     </div>
     <div class="form-row mt-3">
         <div class="form-group col-md-4">
             <label class="form-label">Date of Birth </label>
-            <input type="date" name="date_of_birth" class="form-control" placeholder="DD/MM/YYYY">
+            <input type="date" name="date_of_birth" class="form-control" placeholder="DD/MM/YYYY" required>
         </div>
         <div class="form-group col-md-4">
             <label class="form-label">Citizenship </label>
-            <input type="text" name="citizenship" class="form-control" placeholder="country of citizenship">
+            <input type="text" name="citizenship" class="form-control" placeholder="country of citizenship" required>
         </div>
         <div class="form-group col-md-4">
             <label class="form-label">Skate Level </label>
-            <select name="skate_level" class="form-control">
+            <select name="skate_level" class="form-control" required>
                 <option>Core Blades - LTS</option>
                 <option>Figure Blades - Advanced LTS</option>
                 <option>Future Star 1</option>
@@ -46,15 +46,57 @@
     <div class="form-row mt-3">
         <div class="form-group col-md-8">
             <label class="form-label">Email </label>
-            <input type="email" name="student_email" class="form-control" placeholder="name@somewhere.com">
+            <input type="email" name="student_email" class="form-control" placeholder="name@somewhere.com" required>
         </div>
         <div class="form-group col-md-4">
             <label class="form-label">Phone </label>
-            <input type="text" name="student_phone" class="form-control" placeholder="+65 1234 5678">
+            <input type="tel" name="student_phone" pattern="+65 [0-9]{4} [0-9]{4}" class="form-control" placeholder="+65 1234 5678" required>
         </div>
     </div>
     <div>
         <input type="submit" value="Create" class="btn btn-success mt-3" />
+    </div>
+    <hr>
+    <h5>Competition Data</h5>
+    <div class="form-row mt-3">
+        <div class="form-group col-md-2">
+            <label class="form-label">Year</label>
+            <select name="comp_year" class="form-control">
+                <option>2021</option>
+                <option>2020</option>
+                <option>2019</option>
+                <option>2018</option>
+                <option>2017</option>
+                <option>2016</option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="form-label">Competition</label>
+            <select name="comp_title" class="form-control">
+                <option>Singapore National Figure Skating Championships</option>
+                <option>SISA Inter-School</option>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label class="form-label">Category</label>
+            <select name="comp_category" class="form-control">
+                <option>Core Blades - LTS</option>
+                <option>Figure Blades - Advanced LTS</option>
+                <option>Future Star 1</option>
+                <option>Future Star 2</option>
+                <option>Preliminary</option>
+                <option>Elementary</option>
+                <option>Novice - Basic</option>
+                <option>Novice - Intermediate</option>
+                <option>Novice - Advance</option>
+                <option>Junior</option>
+                <option>Senior</option>
+                <option>Adult Bronze</option>
+                <option>Adult Silver</option>
+                <option>Adult Gold</option>
+                <option>Adult Master</option>
+            </select>
+        </div>
     </div>
 </form>
 
