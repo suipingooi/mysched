@@ -1,0 +1,13 @@
+{% extends 'base.template.html' %}
+
+{%block content%}
+
+<h4>Ice Rinks In Singapore</h4>
+<form method="GET" class="d-flex">
+    <input type="text" name="ice_type" class="form-control me-2"  placeholder="Search by Ice Type" aria-label="Search"/>
+    <input type="submit" value="search" class="btn btn-outline-success ml-3"/>
+</form> 
+    {%for rink in schedule %}
+    
+    {%endfor%}
+{%endblock%}
