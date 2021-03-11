@@ -1,0 +1,19 @@
+{% extends 'base.template.html' %}
+
+{%block content%}
+
+<h4>Skaters List</h4>
+<form method="GET" class="d-flex">
+    <input type="text" name="student_fname" class="form-control me-2"  placeholder="Search by Name" aria-label="Search"/>
+    <input type="submit" value="search" class="btn btn-outline-success ml-3"/>
+</form> 
+    {%for skaters in skaters %}
+    <div class="card m-3" style="width: 12rem;">
+        <img class="card-img-top" src="#" alt="card caption" />
+        <div class="card-body">
+            <h5 class="card-title">{{skaters.student_lname}}, {{skaters.student_fname}}</h5>
+            <h5 class="card-title">{{skaters.skate_level}}</h5>
+        </div>
+    </div>
+    {%endfor%}
+{%endblock%}
