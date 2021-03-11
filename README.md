@@ -7,7 +7,7 @@ This project aims to ....
 <hr>
 
 #### Island Ice Figure Skating Club (IIFSC) - Background
-![Island Ice Figure Skating Club](static/images/iifsc.webp)<br>
+![Island Ice Figure Skating Club](rink/static/images/iifsc.webp) <br>
 Island Ice Figure Skating Club is a social ice skating club formed to provide support to our figure skater members and families. IIFSC focuses on building rapport, camaraderie and harmony within the ice skating community by initiating and organizing a variety of activities that promotes such values through fun/play. IIFSC believes that it takes a village to raise a child and aims to create a strong tribe to support each and every individual skater (and family) to reach their individual skating goals. IIFSC logo represents the blades and scratch lines made when a figure skater draws/cuts an image on ice. Both blades were chosen in pink and blue to signify gender neutrality whislt one being larger than the other as a representation of a parent/educator/coach and child/student.
 
 IIFSC is also the home club for a number of Singapore's National Squad team members.
@@ -22,10 +22,10 @@ Wireframe of the build design includes:
 
 ![Color Chart](#)<br>
 
-<img src="static/images/thumbnail_colors/79f2e6.png" alt="#79F2E6" width="30px"> BLUE denotes stability, balance, and harmony
-<img src="static/images/thumbnail_colors/ff55aa.png" alt="#FF55AA" width="30px"> RED symbolizes power and energy. PINK symbolizes unconditional love and support
-<img src="static/images/thumbnail_colors/faeaaa.png" alt="#FAEAAA" width="30px"> YELLOW is associated with spontainety and flexibility
-<img src="static/images/thumbnail_colors/black.png" alt="black" width="30px"> BLACK symbolizes elegance and sophistication
+<img src="rink/static/images/thumbnail_colors/79f2e6.png" alt="#79F2E6" width="30px"> BLUE denotes stability, balance, and harmony <br>
+<img src="rink/static/images/thumbnail_colors/ff55aa.png" alt="#FF55AA" width="30px"> RED symbolizes power and energy. PINK symbolizes unconditional love and support <br>
+<img src="rink/static/images/thumbnail_colors/faeaaa.png" alt="#FAEAAA" width="30px"> YELLOW is associated with spontainety and flexibility <br>
+<img src="rink/static/images/thumbnail_colors/black.png" alt="black" width="30px"> BLACK symbolizes elegance and sophistication <br>
 
 <hr>
 
