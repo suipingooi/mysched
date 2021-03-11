@@ -1,3 +1,4 @@
+import datetime
 from flask import Flask, render_template, request, redirect, url_for
 import os
 import pymongo
@@ -9,7 +10,7 @@ app = Flask(__name__)
 
 #  Setup to Connect to MongoDB
 MONGO_URI = os.environ.get('MONGO_URI')
-DB_NAME = 'rink'
+DB_NAME = 'iifscDB'
 
 client = pymongo.MongoClient(MONGO_URI)
 db = client[DB_NAME]
@@ -26,7 +27,24 @@ def index():
 # coaches listing - READ
 @app.route('/coaches')
 def coaches_list():
-    coaches = db.coaches.find()
+
+    # search by
+    nrocnum = request.args.get('nroc_level')
+
+    criteria = {}
+
+    if nrocnum:
+        criteria['nroc_level'] = {
+            '$regex': nrocnum, '$options': 'i'
+        }
+
+    coaches = db.coaches.find(criteria, {
+        'coach_lname': 1,
+        'coach_fname': 1,
+        'nroc_level': 1,
+        'philosophy': 1
+    })
+
     return render_template('coach.template.html',
                            coaches=coaches)
 
@@ -61,9 +79,25 @@ def newcoach_form():
 # students listing - READ
 @app.route('/students')
 def students_list():
-    skaters = db.skaters.find()
+
+    # search by
+    skatelvl = request.args.get('skate_level')
+
+    criteria = {}
+
+    if skatelvl:
+        criteria['skate_level'] = {
+            '$regex': skatelvl, '$options': 'i'
+        }
+
+    students = db.students.find(criteria, {
+        'student_lname': 1,
+        'student_fname': 1,
+        'skate_level': 1,
+    })
+
     return render_template('student.template.html',
-                           skaters=skaters)
+                           students=students)
 
 
 # students new - CREATE
@@ -82,10 +116,12 @@ def add_newstudent():
     student_phone = request.form.get('student_phone')
     skate_level = request.form.get('skate_level')
 
+    dob = datetime.datetime.strptime(date_of_birth, '%Y-%m-%d')
+
     db.students.insert_one({
         "student_fname": student_fname,
         "student_lname": student_lname,
-        "date_of_birth": date_of_birth,
+        "date_of_birth": dob,
         "citizenship": citizenship,
         "student_email": student_email,
         "student_phone": student_phone,
@@ -96,7 +132,7 @@ def add_newstudent():
 
 
 # rinks listing - READ
-@app.route('/rinks')
+@ app.route('/rinks')
 def rinks_list():
     rinks = db.rinks.find({}, {
         'rink': 1,
