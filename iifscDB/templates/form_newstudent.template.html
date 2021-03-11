@@ -1,0 +1,61 @@
+{% extends 'base.template.html'%}
+
+{%block content%}
+<h4>Adding a New Student</h4>
+<form method ="POST">
+    <div class="form-row mt-3">
+        <div class="form-group col-md-6">
+            <label class="form-label">First Name </label>
+            <input type="text" name="student_fname" class="form-control" placeholder="given name">
+        </div>
+        <div class="form-group col-md-6">
+            <label class="form-label">Last Name </label>
+            <input type="text" name="student_lname" class="form-control" placeholder="family name">
+        </div>
+    </div>
+    <div class="form-row mt-3">
+        <div class="form-group col-md-4">
+            <label class="form-label">Date of Birth </label>
+            <input type="date" name="date_of_birth" class="form-control" placeholder="DD/MM/YYYY">
+        </div>
+        <div class="form-group col-md-4">
+            <label class="form-label">Citizenship </label>
+            <input type="text" name="citizenship" class="form-control" placeholder="country of citizenship">
+        </div>
+        <div class="form-group col-md-4">
+            <label class="form-label">Skate Level </label>
+            <select name="skate_level" class="form-control">
+                <option>Core Blades - LTS</option>
+                <option>Figure Blades - Advanced LTS</option>
+                <option>Future Star 1</option>
+                <option>Future Star 2</option>
+                <option>Preliminary</option>
+                <option>Elementary</option>
+                <option>Novice - Basic</option>
+                <option>Novice - Intermediate</option>
+                <option>Novice - Advance</option>
+                <option>Junior</option>
+                <option>Senior</option>
+                <option>Adult Bronze</option>
+                <option>Adult Silver</option>
+                <option>Adult Gold</option>
+                <option>Adult Master</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row mt-3">
+        <div class="form-group col-md-8">
+            <label class="form-label">Email </label>
+            <input type="email" name="student_email" class="form-control" placeholder="name@somewhere.com">
+        </div>
+        <div class="form-group col-md-4">
+            <label class="form-label">Phone </label>
+            <input type="text" name="student_phone" class="form-control" placeholder="+65 1234 5678">
+        </div>
+    </div>
+    <div>
+        <input type="submit" value="Create" class="btn btn-success mt-3" />
+    </div>
+</form>
+
+{%endblock%}
