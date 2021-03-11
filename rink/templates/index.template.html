@@ -1,0 +1,21 @@
+{% extends 'base.template.html' %}
+
+{%block content%}
+
+<h4>Training Database</h4>
+
+<form method="GET">
+    <input type="text" name="coach_fname" class="form-control" placeholder="search by name" />
+    <input type="submit" value="search" class="btn btn-primary mt-3" /> 
+</form> 
+    {%for schedule in schedule %}
+    <div class="card m-3" style="width: 22rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{schedule.datetime}}</h5>
+            <h6 class="card-title">{{schedule.ice_type}}</h6>
+            <h6 class="card-title">{{schedule.coach_id}}</h6>
+            <h6 class="card-title">{{schedule.students}}</h6>
+        </div>
+    </div>
+    {%endfor%}
+{%endblock%}
