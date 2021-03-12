@@ -4,6 +4,7 @@
 
 <h4>Coaches List</h4>
 <nav class="navbar navbar-light mx-auto justify-content-between">
+    <a class="btn btn-info mr-3" href="{{ url_for('coaches_list')}}">Show All</a>
     <form method="GET" class="form-inline">
         <input class="form-control mr-sm-2" type="text" name="nroc_level" placeholder="Search by NROC"
             aria-label="Search">
@@ -14,7 +15,10 @@
 <div class="cards">
     {%for coaches in coaches %}
     <div class="card coach m-3">
-        <img class="card-img-top" src="#" alt="card img caption" />
+        <div>
+            <a href="{{ url_for('del_coach', coach_id=coaches._id )}}" type="button" class="close">&times;</a>
+        </div>
+        <img class="card-img-top" src="{{ url_for('static', filename='images/profile_coaches/michelle.png')}}" alt="{{coaches.coach_fname}} {{coaches.coach_lname}}" />
         <div class="card-body">
             <h5 class="card-title">Coach {{coaches.coach_fname}} {{coaches.coach_lname}}</h5>
             <h6 class="card-title">NROC{{coaches.nroc_level}}</h6>
