@@ -108,7 +108,7 @@ A demo of the site can be found here [#](#)
 
 
 #### Media
-1.  
+1.  pencil icon extracted from simpleicon.com http://simpleicon.com/pencil.html on 12March2021
 
 ## Acknowledgments
 1. 
