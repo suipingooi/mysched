@@ -8,7 +8,7 @@
     <form method="GET" class="form-inline">
         <input class="form-control mr-sm-2" type="text" name="nroc_level" placeholder="Search by NROC"
             aria-label="Search">
-        <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search" />
+        <input class="btn btn-outline-info my-2 my-sm-0" type="submit" value="Search" />
     </form>
     <a class="btn btn-success mx-auto d-block" href="{{ url_for('add_newcoach')}}">Add New</a>
 </nav>
@@ -17,13 +17,32 @@
     <div class="card coach m-3">
         <div>
             <a href="{{ url_for('del_coach', coach_id=coaches._id )}}" type="button" class="close">&times;</a>
+            <a href="{{ url_for('update_coach', coach_id=coaches._id )}}" type="button" class="close pencil">
+                <img id="pencil" src="{{ url_for('static', filename='images/pencil.png')}}"/>
+            </a>
         </div>
-        <img class="card-img-top" src="{{ url_for('static', filename='images/profile_coaches/michelle.png')}}" alt="{{coaches.coach_fname}} {{coaches.coach_lname}}" />
+        <img class="card-img-top" src="{{ url_for('static', filename='images/profile_coaches/')}}" alt="{{coaches.coach_fname}} {{coaches.coach_lname}}" />
         <div class="card-body">
             <h5 class="card-title">Coach {{coaches.coach_fname}} {{coaches.coach_lname}}</h5>
             <h6 class="card-title">NROC{{coaches.nroc_level}}</h6>
-            <p class="card-text">{{coaches.philosophy}}</p>
-            <button class="btn btn-outline-info" href="#">Check Availability</button>
+            <p class="card-text">"{{coaches.philosophy}}"</p>
+            <button class="btn btn-outline-info" type="button" data-toggle="modal" data-target="#coachModal">Check Availability</button>
+        </div>
+        <div class="modal fade" id="coachModal" tabindex="-1" role="dialog" aria-labelledby="coachModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Coach {{coaches.coach_fname}} {{coaches.coach_lname}}</h5>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Email {{coaches.coach_email}}</h6>
+                        <h6>Phone {{coaches.coach_phone}}</h6>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     {%endfor%}

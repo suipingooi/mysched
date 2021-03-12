@@ -43,7 +43,9 @@ def coaches_list():
         'coach_lname': 1,
         'coach_fname': 1,
         'nroc_level': 1,
-        'philosophy': 1
+        'philosophy': 1,
+        'coach_email': 1,
+        'coach_phone': 1
     })
 
     return render_template('coach.template.html',
@@ -74,17 +76,17 @@ def newcoach_form():
         "philosophy": philosophy
     })
 
-    return "Coach Added Successfully"
+    return redirect(url_for('coaches_list'))
 
 
 # coaches remove - DELETE
 @app.route('/coaches/<coach_id>/delete')
 def del_coach(coach_id):
-    coach = db.coaches.find_one({
+    coach_to_delete = db.coaches.find_one({
         '_id': ObjectId(coach_id)
     })
     return render_template('validate_coach.template.html',
-                           coach_to_delete=coach)
+                           coach_to_delete=coach_to_delete)
 
 
 @app.route('/coaches/<coach_id>/delete', methods=['POST'])
@@ -95,8 +97,28 @@ def process_delete_coach(coach_id):
     return redirect(url_for('coaches_list'))
 
 
+@app.route('/coaches/<coach_id>/update')
+def update_coach(coach_id):
+    coach_to_edit = db.coaches.find_one({
+        '_id': ObjectId(coach_id)
+    })
+    return render_template('update_coach.template.html',
+                           coach_to_edit=coach_to_edit)
+
+
+@app.route('/coaches/<coach_id>/update', methods=['POST'])
+def process_update_coach(coach_id):
+    db.coaches.update_one({
+        '_id': ObjectId(coach_id)
+    }, {
+        '$set': request.form
+    })
+    return redirect(url_for('coaches_list'))
+
 # STUDENTS PAGE
 # students listing - READ
+
+
 @app.route('/students')
 def students_list():
 
