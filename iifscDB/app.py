@@ -1,7 +1,8 @@
 import datetime
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, url_for, redirect
 import os
 import pymongo
+from bson.objectid import ObjectId
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -73,7 +74,7 @@ def newcoach_form():
         "philosophy": philosophy
     })
 
-    return "New Coach Added"
+    return redirect(url_for('coaches_list'))
 
 
 # students listing - READ
@@ -128,7 +129,7 @@ def add_newstudent():
         "skate_level": skate_level
     })
 
-    return "New Student Added"
+    return redirect(url_for('students_list'))
 
 
 # rinks listing - READ
