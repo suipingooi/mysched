@@ -1,10 +1,9 @@
+from flask import Flask, render_template, request, redirect, url_for
 import datetime
-from flask import Flask, render_template, request, url_for, redirect
 import os
+from dotenv import load_dotenv
 import pymongo
 from bson.objectid import ObjectId
-from dotenv import load_dotenv
-
 load_dotenv()
 
 app = Flask(__name__)
@@ -25,6 +24,7 @@ def index():
                            schedule=schedule)
 
 
+# COACHES PAGE
 # coaches listing - READ
 @app.route('/coaches')
 def coaches_list():
@@ -50,13 +50,13 @@ def coaches_list():
                            coaches=coaches)
 
 
-# coaches new - CREATE
+# coaches add new - CREATE
 @app.route('/coaches/add')
 def add_newcoach():
     return render_template('form_newcoach.template.html')
 
 
-@app.route('/coaches/add', methods=["POST"])
+@app.route('/coaches/add', methods=['POST'])
 def newcoach_form():
     coach_fname = request.form.get('coach_fname')
     coach_lname = request.form.get('coach_lname')
@@ -74,9 +74,28 @@ def newcoach_form():
         "philosophy": philosophy
     })
 
+    return "Coach Added Successfully"
+
+
+# coaches remove - DELETE
+@app.route('/coaches/<coach_id>/delete')
+def del_coach(coach_id):
+    coach = db.coaches.find_one({
+        '_id': ObjectId(coach_id)
+    })
+    return render_template('validate_coach.template.html',
+                           coach_to_delete=coach)
+
+
+@app.route('/coaches/<coach_id>/delete', methods=['POST'])
+def process_delete_coach(coach_id):
+    db.coaches.remove({
+        '_id': ObjectId(coach_id)
+    })
     return redirect(url_for('coaches_list'))
 
 
+# STUDENTS PAGE
 # students listing - READ
 @app.route('/students')
 def students_list():
@@ -107,7 +126,7 @@ def newstudent_form():
     return render_template('form_newstudent.template.html')
 
 
-@app.route('/students/add', methods=["POST"])
+@app.route('/students/add', methods=['POST'])
 def add_newstudent():
     student_fname = request.form.get('student_fname')
     student_lname = request.form.get('student_lname')
@@ -146,6 +165,6 @@ def rinks_list():
 
 # "magic code" -- boilerplate
 if __name__ == '__main__':
-    app.run(host='localhost',
+    app.run(host='0.0.0.0',
             port=8080,
             debug=True)
