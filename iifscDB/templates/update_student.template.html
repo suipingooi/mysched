@@ -1,0 +1,66 @@
+{% extends 'base.template.html'%}
+
+{%block content%}
+<h4>Edit Details for {{student_to_edit.skate_level}} Skater {{student_to_edit.student_fname}} {{student_to_edit.student_lname}}</h4>
+<form method="POST">
+    <div class="form-row mt-3">
+        <div class="form-group col-md-6">
+            <label class="form-label">First Name </label>
+            <input type="text" name="student_fname" value="{{student_to_edit.student_fname}}" class="form-control"
+                placeholder="given name">
+        </div>
+        <div class="form-group col-md-6">
+            <label class="form-label">Last Name </label>
+            <input type="text" name="student_lname" value="{{student_to_edit.student_lname}}" class="form-control"
+                placeholder="family name">
+        </div>
+    </div>
+    <div class="form-row mt-3">
+        <div class="form-group col-md-4">
+            <label class="form-label">Date of Birth </label>
+            <input type="date" name="date_of_birth" class="form-control" placeholder="DD/MM/YYYY" required>
+        </div>
+        <div class="form-group col-md-4">
+            <label class="form-label">Citizenship </label>
+            <input type="text" name="citizenship" value="{{student_to_edit.citizenship}}" class="form-control"
+                placeholder="country of citizenship">
+        </div>
+        <div class="form-group col-md-4">
+            <label class="form-label">Skate Level </label>
+            <select name="skate_level" class="form-control">
+                <option {%if student_to_edit.skate_level == 'Core Blades - LTS'%} selected {%endif%}>Core Blades - LTS
+                </option>
+                <option {%if student_to_edit.skate_level == 'Figure Blades - Advanced LTS'%} selected {%endif%}>Figure
+                    Blades - Advanced LTS</option>
+                <option {%if student_to_edit.skate_level == 'Future Star 1'%} selected {%endif%}>Future Star 1</option>
+                <option {%if student_to_edit.skate_level == 'Future Star 2'%} selected {%endif%}>Future Star 2</option>
+                <option {%if student_to_edit.skate_level == 'Preliminary'%} selected {%endif%}>Preliminary</option>
+                <option {%if student_to_edit.skate_level == 'Elementary'%} selected {%endif%}>Elementary</option>
+                <option {%if student_to_edit.skate_level == 'Novice (basic)'%} selected {%endif%}>Novice (basic)</option>
+                <option {%if student_to_edit.skate_level == 'Novice (intermediate)'%} selected {%endif%}>Novice (intermediate)</option>
+                <option {%if student_to_edit.skate_level == 'Novice (advance)'%} selected {%endif%}>Novice (advance)</option>
+                <option {%if student_to_edit.skate_level == 'Junior'%} selected {%endif%}>Junior</option>
+                <option {%if student_to_edit.skate_level == 'Senior'%} selected {%endif%}>Senior</option>
+                <option {%if student_to_edit.skate_level == 'Adult Bronze'%} selected {%endif%}>Adult Bronze</option>
+                <option {%if student_to_edit.skate_level == 'Adult Silver'%} selected {%endif%}>Adult Silver</option>
+                <option {%if student_to_edit.skate_level == 'Adult Gold'%} selected {%endif%}>Adult Gold</option>
+                <option {%if student_to_edit.skate_level == 'Adult Master'%} selected {%endif%}>Adult Master</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row mt-3">
+        <div class="form-group col-md-8">
+            <label class="form-label">Email </label>
+            <input type="email" name="student_email" value="{{student_to_edit.student_email}}" class="form-control" placeholder="name@somewhere.com">
+        </div>
+        <div class="form-group col-md-4">
+            <label class="form-label">Phone </label>
+            <input type="tel" name="student_phone" value="{{student_to_edit.student_phone}}" pattern="+65 [0-9]{4} [0-9]{4}" class="form-control"
+                placeholder="+65 1234 5678">
+        </div>
+    </div>
+    <div>
+        <a class="btn btn-outline-success mt-3" href="{{ url_for('students_list')}}"> Back</a>
+        <input type="submit" value="Update" class="btn btn-success mt-3" />
+    </div>
+{%endblock%}
