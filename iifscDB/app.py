@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 import datetime
+from datetime import date
 import os
 from dotenv import load_dotenv
 import pymongo
@@ -7,8 +8,9 @@ from bson.objectid import ObjectId
 load_dotenv()
 
 app = Flask(__name__)
+app.secret_key = os.environ.get('SECRET_KEY')
 
-#  Setup to Connect to MongoDB
+
 MONGO_URI = os.environ.get('MONGO_URI')
 DB_NAME = 'iifscDB'
 
@@ -16,7 +18,6 @@ client = pymongo.MongoClient(MONGO_URI)
 db = client[DB_NAME]
 
 
-# index landing page - READ
 @app.route('/')
 def index():
     schedule = db.schedule.find()
@@ -75,7 +76,7 @@ def newcoach_form():
         "coach_phone": coach_phone,
         "philosophy": philosophy
     })
-
+    flash("File for Coach CREATED")
     return redirect(url_for('coaches_list'))
 
 
@@ -94,6 +95,7 @@ def process_delete_coach(coach_id):
     db.coaches.remove({
         '_id': ObjectId(coach_id)
     })
+    flash("File for Coach DELETED")
     return redirect(url_for('coaches_list'))
 
 
@@ -113,12 +115,11 @@ def process_update_coach(coach_id):
     }, {
         '$set': request.form
     })
+    flash("File for Coach UPDATED")
     return redirect(url_for('coaches_list'))
 
-# STUDENTS PAGE
-# students listing - READ
 
-
+# STUDENTS
 @app.route('/students')
 def students_list():
 
@@ -142,13 +143,12 @@ def students_list():
                            students=students)
 
 
-# students new - CREATE
-@app.route('/students/add')
+@app.route('/students/add_newstudent')
 def newstudent_form():
     return render_template('form_newstudent.template.html')
 
 
-@app.route('/students/add', methods=['POST'])
+@app.route('/students/add_newstudent', methods=['POST'])
 def add_newstudent():
     student_fname = request.form.get('student_fname')
     student_lname = request.form.get('student_lname')
@@ -167,19 +167,138 @@ def add_newstudent():
         "citizenship": citizenship,
         "student_email": student_email,
         "student_phone": student_phone,
-        "skate_level": skate_level
+        "skate_level": skate_level,
+    })
+    flash("File for Skater CREATED")
+    return redirect(url_for('students_list'))
+
+
+@ app.route('/students/<student_id>/skater')
+def student_skater(student_id):
+    student_to_show = db.students.find_one({
+        '_id': ObjectId(student_id)
     })
 
+    return render_template('skaterID.template.html',
+                           student_to_show=student_to_show)
+
+
+@ app.route('/students/<student_id>/form_competition')
+def addcompetition_form(student_id):
+    student_to_task = db.students.find_one({
+        '_id': ObjectId(student_id)
+    })
+    return render_template('form_addcompetition.template.html',
+                           student_to_task=student_to_task)
+
+
+@ app.route('/students/<student_id>/form_competition', methods=['POST'])
+def add_competition(student_id):
+    db.students.find_one({
+        '_id': ObjectId(student_id)
+    })
+
+    year = int(request.form.get('comp_year'))
+    title = request.form.get('comp_title')
+    category = request.form.get('comp_category')
+    seq1 = request.form.get('comp_seq1')
+    seq2 = request.form.get('comp_seq2')
+    seq3 = request.form.get('comp_seq3')
+    seq4 = request.form.get('comp_seq4')
+    seq5 = request.form.get('comp_seq5')
+    seq6 = request.form.get('comp_seq6')
+    seq7 = request.form.get('comp_seq7')
+    base = float(request.form.get('comp_base'))
+    TES = float(request.form.get('comp_tes'))
+    PCS = float(request.form.get('comp_pcs'))
+    TSS = float(PCS + TES)
+
+    db.students.update({
+        '_id': ObjectId(student_id)
+    }, {
+        '$push': {
+            "competition_data": [
+                {
+                    'comp_year': year,
+                    'comp_title': title,
+                    'category': category,
+                    'seq1': seq1,
+                    'seq2': seq2,
+                    'seq3': seq3,
+                    'seq4': seq4,
+                    'seq5': seq5,
+                    'seq6': seq6,
+                    'seq7': seq7,
+                    'base_value': base,
+                    'TES': TES,
+                    'PCS': PCS,
+                    'TSS': TSS
+                }
+            ]
+        }
+    })
+    flash("File for Skater UPDATED")
+    return redirect(url_for('students_list'))
+
+
+@ app.route('/students/<student_id>/delete')
+def del_student(student_id):
+    student_to_delete = db.students.find_one({
+        '_id': ObjectId(student_id)
+    })
+    return render_template('validate_student.template.html',
+                           student_to_delete=student_to_delete)
+
+
+@ app.route('/students/<student_id>/delete', methods=['POST'])
+def process_delete_student(student_id):
+    db.students.remove({
+        '_id': ObjectId(student_id)
+    })
+    flash("File for Student DELETED")
+    return redirect(url_for('students_list'))
+
+
+@ app.route('/students/<student_id>/update')
+def update_student(student_id):
+    student_to_edit = db.students.find_one({
+        '_id': ObjectId(student_id)
+    })
+    return render_template('update_student.template.html',
+                           student_to_edit=student_to_edit)
+
+
+@ app.route('/students/<student_id>/update', methods=['POST'])
+def process_update_student(student_id):
+    db.students.update_one({
+        '_id': ObjectId(student_id)
+    }, {
+        '$set': request.form
+    })
+    flash("File for Skater UPDATED")
     return redirect(url_for('students_list'))
 
 
 # rinks listing - READ
 @ app.route('/rinks')
 def rinks_list():
-    rinks = db.rinks.find({}, {
-        'rink': 1,
-        'address': 1,
-        'website': 1
+
+    locreq = request.args.get('location')
+
+    criteria = {}
+
+    if locreq:
+        criteria['location'] = {
+            '$regex': locreq, '$options': 'i'
+        }
+
+    rinks = db.rinks.find(criteria, {
+        'name': 1,
+        'location': 1,
+        'phone': 1,
+        'address.unit': 1,
+        'address.building': 1,
+        'address.street': 1,
     })
     return render_template('rink.template.html',
                            rinks=rinks)

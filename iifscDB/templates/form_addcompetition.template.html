@@ -1,0 +1,100 @@
+{% extends 'base.template.html' %}
+
+{%block content%}
+<h4>Adding Competition Data for SKATER</h4>
+<form method="POST">
+    <div class="form-row mt-3">
+        <div class="form-group col-md-2">
+            <label class="form-label">Competition Year</label>
+            <select name="comp_year" class="form-control">
+                <option>2021</option>
+                <option>2020</option>
+                <option>2019</option>
+                <option>2018</option>
+                <option>2017</option>
+                <option>2016</option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="form-label">Competition Title</label>
+            <select name="comp_title" class="form-control">
+                <option>Singapore National Figure Skating Championships</option>
+                <option>SISA Inter-School</option>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label class="form-label">Category</label>
+            <select name="comp_category" class="form-control">
+                <option>Core Blades - LTS</option>
+                <option>Figure Blades - Advanced LTS</option>
+                <option>Future Star 1</option>
+                <option>Future Star 2</option>
+                <option>Preliminary</option>
+                <option>Elementary</option>
+                <option>Novice - Basic</option>
+                <option>Novice - Intermediate</option>
+                <option>Novice - Advance</option>
+                <option>Junior</option>
+                <option>Senior</option>
+                <option>Adult Bronze</option>
+                <option>Adult Silver</option>
+                <option>Adult Gold</option>
+                <option>Adult Master</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row mt-3">
+        <div class="form-group col-md-1">
+            <label class="form-label">Seq 1</label>
+            <input type="text" name="comp_seq1" class="form-control">
+        </div>
+        <div class="form-group col-md-1">
+            <label class="form-label">Seq 2</label>
+            <input type="text" name="comp_seq2" class="form-control">
+        </div>
+        <div class="form-group col-md-1">
+            <label class="form-label">Seq 3</label>
+            <input type="text" name="comp_seq3" class="form-control">
+        </div>
+        <div class="form-group col-md-1">
+            <label class="form-label">Seq 4</label>
+            <input type="text" name="comp_seq4" class="form-control">
+        </div>
+        <div class="form-group col-md-1">
+            <label class="form-label">Seq 5</label>
+            <input type="text" name="comp_seq5" class="form-control">
+        </div>
+        <div class="form-group col-md-1">
+            <label class="form-label">Seq 6</label>
+            <input type="text" name="comp_seq6" class="form-control">
+        </div>
+        <div class="form-group col-md-1">
+            <label class="form-label">Seq 7</label>
+            <input type="text" name="comp_seq7 " class="form-control">
+        </div>
+        <div class="form-group col-md-1">
+            <label class="form-label">Base</label>
+            <input type="float" name="comp_base" class="form-control">
+        </div>
+        <div class="form-group col-md-1">
+            <label class="form-label">TES</label>
+            <input type="float" name="comp_tes" class="form-control">
+        </div>
+        <div class="form-group col-md-1">
+            <label class="form-label">PCS</label>
+            <input type="float" name="comp_pcs" class="form-control">
+        </div>
+        <div class="form-group col-md-2">
+            <label class="form-label">TSS</label>
+            <input type="float" name="comp_tss" class="form-control" disabled placeholder="">
+        </div>
+    </div>
+    <div>
+        <a href="{{ url_for('student_skater', student_id=student_to_task._id )}}" class="btn btn-outline-success mt-3"
+            type="button"> Back</a>
+        <input type="submit" value="Add" class="btn btn-success mt-3" />
+    </div>
+</form>
+
+
+{%endblock%}

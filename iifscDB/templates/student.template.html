@@ -4,20 +4,29 @@
 
 <h4>Skaters List</h4>
 <nav class="navbar navbar-light mx-auto justify-content-between">
+    <a class="btn btn-info mr-3" href="{{ url_for('students_list')}}">Show All</a>
     <form method="GET" class="form-inline">
         <input class="form-control mr-sm-2" type="text" name="skate_level" placeholder="Search by Skate Level"
             aria-label="Search">
-        <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search" />
+        <input class="btn btn-outline-info my-2 my-sm-0" type="submit" value="Search" />
     </form>
     <a class="btn btn-success mx-auto d-block" href="{{ url_for('add_newstudent')}}">Add New</a>
 </nav>
 <div class="cards">
     {%for students in students %}
     <div class="card m-3 student">
-        <img class="card-img-top" src="#" alt="card caption" />
+        <div>
+            <a href="{{ url_for('del_student', student_id=students._id )}}" type="button" class="close">&times;</a>
+            <a href="{{ url_for('update_student', student_id=students._id )}}" type="button" class="close pencil">
+                <img id="pencil" src="{{ url_for('static', filename='images/pencil.png')}}" />
+            </a>
+        </div>
+        <img class="card-img-top" src="#" alt="{{students.student_fname}} {{students.student_lname}}" />
         <div class="card-body">
-            <h5 class="card-title">{{students.student_lname}}, {{students.student_fname}}</h5>
-            <h5 class="card-title">{{students.skate_level}}</h5>
+            <h5 class="card-title">{{students.student_fname}} {{students.student_lname}} </h5>
+            <h6 class="card-title">{{students.skate_level}}</h6>
+            <a href="{{ url_for('student_skater', student_id=students._id )}}" type="button"
+                class="btn btn-outline-info">More Info</a>
         </div>
     </div>
     {%endfor%}
