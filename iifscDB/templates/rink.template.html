@@ -2,12 +2,29 @@
 
 {%block content%}
 
-<h4>Ice Rinks In Singapore</h4>
-<form method="GET" class="d-flex">
-    <input type="text" name="ice_type" class="form-control me-2"  placeholder="Search by Ice Type" aria-label="Search"/>
-    <input type="submit" value="search" class="btn btn-outline-success ml-3"/>
-</form> 
-    {%for rink in schedule %}
-    
+<h4>Ice Rinks in Singapore</h4>
+<nav class="navbar navbar-light justify-content-start">
+    <a class="btn btn-info mr-3" type="button" href="{{ url_for('rinks_list')}}">Show All</a>
+        <form method="GET" class="form-inline">
+            <input class="form-control mr-sm-2" type="text" name="location" placeholder="Search by Location"
+                aria-label="Search">
+            <input class="btn btn-outline-info my-2 my-sm-0" type="submit" value="Search" />
+        </form>
+</nav>
+    {%for rinks in rinks %}
+<div class="cards">
+    <div class="card m-3 rink">
+        <img class="card-img-top" src="#" alt="{{rinks.name}} {{rinks.location}}" />
+        <div class="card-body">
+            <h5 class="card-title">{{rinks.name}} @ {{rinks.location}} </h5>
+            <h6 class="card-title">{{rinks.phone}}</h6>
+            <h6 class="card-title">{{rinks.address.unit}} {{rinks.address.building}}</h6>
+            <h6 class="card-title">{{rinks.address.street}}</h6>
+            <a class="btn btn-info mr-3" type="button" href="{{rinks.website}}">Visit Website</a>
+        </div>
+       
+    </div>
     {%endfor%}
+</div>
+    
 {%endblock%}
