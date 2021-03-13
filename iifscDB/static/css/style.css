@@ -2,12 +2,6 @@ body {
     background-color: aliceblue;
     margin: 25px;
 }
-.coach {
-    margin: 10px;
-    padding: 5px;
-    color: Navy;
-    width: 18rem;
-}
 .cards {
     display: flex;
     flex-wrap: wrap;
@@ -15,11 +9,25 @@ body {
 .card-text {
     font-style: italic;
 }
+.coach {
+    margin: 10px;
+    padding: 5px;
+    color: Navy;
+    width: 18rem;
+     border-radius:8px;
+}
 .student {
     margin: 10px;
     padding: 5px;
     color: Navy;
-    width: 12rem;
+    width: 16rem;
+    border-radius:8px;
+}
+.rink {
+    margin: 10px;
+    padding: 5px;
+    width: 50vw;
+    color: black;
 }
 .close {
     color: darkred;
@@ -43,4 +51,11 @@ body {
 .card-img-top {
     width: 60%;
     align-self: center;
+}
+.alert {
+    border-radius: 50px;
+    padding-top:30px;
+}
+.alert-danger {
+    padding-bottom: 30px;
 }
