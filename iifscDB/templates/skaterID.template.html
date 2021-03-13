@@ -1,0 +1,25 @@
+{% extends 'base.template.html' %}
+
+{%block content%}
+<h4>Skater {{student_to_show.student_fname}} {{student_to_show.student_lname}}</h4>
+<div class="container">
+
+    <div class="m-3 cards">
+        <img src="#" alt="{{student_to_show.student_fname}} {{student_to_show.student_lname}}">
+        <div>
+            <div>
+                <h4>{{cur_date}}</h4>
+                <h6>{{student_to_show.citizenship}}</h6>
+                <h6>{{student_to_show.skate_level}}</h6>
+                <h6>{{student_to_show.date_of_birth}}</h6>
+                <h6>{{student_to_show.student_email}}</h6>
+                <h6>{{student_to_show.student_phone}}</h6>
+                <h6>{{student_to_show.competition_data}}</h6>
+            </div>
+        </div>
+        <a href="{{ url_for('students_list')}}" class="btn btn-outline-success mt-3" type="button"> Back</a>
+        <a href="{{ url_for('addcompetition_form', student_id=student_to_show._id )}}" type="button"
+            class="btn btn-success mt-3 ml-3">Add Competition</a>
+    </div>
+
+    {%endblock%}6>
