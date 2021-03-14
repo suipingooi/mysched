@@ -14,7 +14,7 @@ body {
     padding: 5px;
     color: Navy;
     width: 18rem;
-     border-radius:8px;
+    border-radius:8px;
 }
 .student {
     margin: 10px;
@@ -58,4 +58,7 @@ body {
 }
 .alert-danger {
     padding-bottom: 30px;
+}
+.dob {
+    padding: 0px;
 }
