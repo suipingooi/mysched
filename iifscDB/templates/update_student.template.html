@@ -8,23 +8,36 @@
         <div class="form-group col-md-6">
             <label class="form-label">First Name </label>
             <input type="text" name="student_fname" value="{{student_to_edit.student_fname}}" class="form-control"
-                placeholder="given name">
+                placeholder="given name" required>
         </div>
         <div class="form-group col-md-6">
             <label class="form-label">Last Name </label>
             <input type="text" name="student_lname" value="{{student_to_edit.student_lname}}" class="form-control"
-                placeholder="family name">
+                placeholder="family name" required>
         </div>
     </div>
     <div class="form-row mt-3">
         <div class="form-group col-md-4">
-            <label class="form-label">Date of Birth </label>
-            <input type="date" name="date_of_birth" class="form-control" placeholder="DD/MM/YYYY" required>
+            <label class="form-label">Date of Birth</label>
+            <div class="row">
+                <div class="form-group col-sm-4">
+                    <input type="number" name="date_of_birth_day" value="{{student_to_edit.date_of_birth_day}}"
+                        class="form-control form-inline" placeholder="DD" min="1" max="31" required>
+                </div>
+                <div class="form-group col-sm-3 dob">
+                    <input type="text" name="date_of_birth_month" value="{{student_to_edit.date_of_birth_month}}"
+                        class="form-control form-inline" placeholder="MMM"required>
+                </div>
+                <div class="form-group col-sm-5">
+                    <input type="number" name="date_of_birth_year" value="{{student_to_edit.date_of_birth_year}}"
+                        class="form-control form-inline" placeholder="YYYY" min="1940" max="2016" required>
+                </div>
+            </div>
         </div>
         <div class="form-group col-md-4">
             <label class="form-label">Citizenship </label>
             <input type="text" name="citizenship" value="{{student_to_edit.citizenship}}" class="form-control"
-                placeholder="country of citizenship">
+                placeholder="country of citizenship" required>
         </div>
         <div class="form-group col-md-4">
             <label class="form-label">Skate Level </label>
@@ -53,15 +66,20 @@
         </div>
     </div>
     <div class="form-row mt-3">
-        <div class="form-group col-md-8">
+        <div class="form-group col-md-2">
+            <label class="form-label">Age </label>
+            <input type="text" name="age" value="{{student_to_edit.age}}" class="form-control" disabled
+                placeholder="{{student_to_edit.age}}" required>
+        </div>
+        <div class="form-group col-md-5">
             <label class="form-label">Email </label>
             <input type="email" name="student_email" value="{{student_to_edit.student_email}}" class="form-control"
-                placeholder="name@somewhere.com">
+                placeholder="name@somewhere.com" required>
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-5">
             <label class="form-label">Phone </label>
             <input type="tel" name="student_phone" value="{{student_to_edit.student_phone}}"
-                pattern="+65 [0-9]{4} [0-9]{4}" class="form-control" placeholder="+65 1234 5678">
+                pattern="+65 [0-9]{4} [0-9]{4}" class="form-control" placeholder="+65 1234 5678" required>
         </div>
     </div>
     <div>

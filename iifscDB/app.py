@@ -137,6 +137,7 @@ def students_list():
         'student_lname': 1,
         'student_fname': 1,
         'skate_level': 1,
+        'age': 1,
     })
 
     return render_template('student.template.html',
@@ -152,18 +153,65 @@ def newstudent_form():
 def add_newstudent():
     student_fname = request.form.get('student_fname')
     student_lname = request.form.get('student_lname')
-    date_of_birth = request.form.get('date_of_birth')
-    citizenship = request.form.get('citizenship')
+    date_of_birth_day = request.form.get('date_of_birth_day')
+    date_of_birth_month = request.form.get('date_of_birth_month')
+    date_of_birth_year = request.form.get('date_of_birth_year')
+    citizenship = request.form.get('citizenship').upper()
     student_email = request.form.get('student_email')
     student_phone = request.form.get('student_phone')
     skate_level = request.form.get('skate_level')
 
-    dob = datetime.datetime.strptime(date_of_birth, '%Y-%m-%d')
+    date_of_birth = (date_of_birth_day +
+                     date_of_birth_month +
+                     date_of_birth_year)
+
+    dob_dt = datetime.datetime.strptime(date_of_birth, '%d%m%Y')
+    today = date.today()
+    today_str = today.strftime("%Y-%m-%d")
+    cur_dt = datetime.datetime.strptime(today_str, '%Y-%m-%d')
+    age_td = str(cur_dt - dob_dt)
+    age_days_str = age_td.rstrip('days, 00:00:00')
+    age_days_int = int(age_days_str)
+    age = int(age_days_int // 365.2425)
+
+    m = date_of_birth_month
+    if m == "01":
+        m = "JAN"
+    elif m == "02":
+        m = "FEB"
+    elif m == "03":
+        m = "MAR"
+    elif m == "04":
+        m = "APR"
+    elif m == "05":
+        m = "MAY"
+    elif m == "06":
+        m = "JUN"
+    elif m == "07":
+        m = "JUL"
+    elif m == "08":
+        m = "AUG"
+    elif m == "09":
+        m = "SEP"
+    elif m == "10":
+        m = "OCT"
+    elif m == "11":
+        m = "NOV"
+    elif m == "12":
+        m = "DEC"
+    date_of_birth_month = m
+    date_of_birth = (date_of_birth_day +
+                     date_of_birth_month +
+                     date_of_birth_year)
 
     db.students.insert_one({
         "student_fname": student_fname,
         "student_lname": student_lname,
-        "date_of_birth": dob,
+        "date_of_birth": date_of_birth,
+        "date_of_birth_day": date_of_birth_day,
+        "date_of_birth_month": date_of_birth_month,
+        "date_of_birth_year": date_of_birth_year,
+        "age": age,
         "citizenship": citizenship,
         "student_email": student_email,
         "student_phone": student_phone,
@@ -237,6 +285,7 @@ def add_competition(student_id):
             ]
         }
     })
+
     flash("File for Skater UPDATED")
     return redirect(url_for('students_list'))
 
@@ -264,6 +313,7 @@ def update_student(student_id):
     student_to_edit = db.students.find_one({
         '_id': ObjectId(student_id)
     })
+
     return render_template('update_student.template.html',
                            student_to_edit=student_to_edit)
 
@@ -299,6 +349,7 @@ def rinks_list():
         'address.unit': 1,
         'address.building': 1,
         'address.street': 1,
+        'website': 1,
     })
     return render_template('rink.template.html',
                            rinks=rinks)
